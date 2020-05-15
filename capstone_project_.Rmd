@@ -88,7 +88,7 @@ we have to split genres column
 # my computer sources was not enough for proccess 10m rows data,
 #therefore i used  dataset partially during development
 
- edx <- head(edx,1000000)  #if you get memory error use this code
+## edx <- head(edx,1000000)  #if you get memory error use this code
 
 
 ```
