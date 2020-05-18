@@ -287,7 +287,8 @@ publisher__ <- publisher_ %>% arrange(desc(Global_sales))  %>% head(10)
 publisher__ %>% head()
 
 publisher__  %>% ggplot(aes(x=as.character(Publisher), y=Global_sales)) + geom_bar(stat = "identity") +
-  xlab("Publisher)") + ylab("Global SAle") + ggtitle('Top 10 publisher global sales')
+  xlab("Publisher)") + ylab("Global SAle") + ggtitle('Top 10 publisher global sales') + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
 
@@ -308,7 +309,8 @@ year_ <- data %>% group_by(Year_of_Release) %>%
 
 
 year_  %>% ggplot(aes(x=as.numeric(as.character(Year_of_Release)), y=count)) + geom_path() +
-  xlab("Year)") + ylab("Game Count") + ggtitle('Game Count per year')
+  xlab("Year)") + ylab("Game Count") + ggtitle('Game Count per year') +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
 
@@ -320,7 +322,8 @@ year_publisher_ <- data %>% group_by(Year_of_Release, Publisher) %>% group_by(Ye
 year_publisher_  %>% head()
 
 year_publisher_   %>% ggplot(aes(x=Year_of_Release, y=count)) + geom_bar(stat = "identity") +
-  xlab("Year)") + ylab("Game Count") + ggtitle('Sales By Yaer')
+  xlab("Year)") + ylab("Game Count") + ggtitle('Sales By Yaer') +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
 
@@ -346,8 +349,8 @@ ggplot(data[data$Year_of_Release!="N/A",], aes(x=Year_of_Release, fill=..count..
   labs(title="Number of Games Released every Year", x= "Game", 
        y= "Total Number of Games")+
   geom_text(stat='count',aes(label=..count..), hjust=-0.1,color="darkblue", size=2.5)+
-  coord_flip()
-
+  coord_flip() +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
 
@@ -422,9 +425,7 @@ rmse_results <- data_frame(method = "Lineer regression", RMSE =  ln_rmse)
 
 
 ## Sport vector machine
-control <- trainControl(method='none', 
-                        number=10, 
-                        repeats=3)
+control <- trainControl(method='none')
 
 set.seed(666)
 sv_fit <- train(EU_Sales~Year_of_Release+Genre+Critic_Score+
@@ -444,9 +445,7 @@ sv_rmse
 rmse_results <- bind_rows(rmse_results, data_frame(method = "Support vectore meachine", RMSE =  sv_rmse))
 
 #10 folds repeat 3 times
-control <- trainControl(method='none', 
-                        number=10, 
-                        repeats=3)
+control <- trainControl(method='none')
 ## random forest 
 
 set.seed(666)

@@ -1,0 +1,1197 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Video Game Sales Analysis},
+            pdfauthor={Savas turkoglu},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Video Game Sales Analysis}
+\author{Savas turkoglu}
+\date{5/18/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{1- Introduction}\label{introduction}}
+
+\begin{itemize}
+\tightlist
+\item
+  This data science project created for Harvard Data Science
+  Certification program at Edx by Savas Turkoglu
+\end{itemize}
+
+We will analysis and visualizate dataset that about video game sales
+arround the world over years
+
+The video game industry is growing so fast that some believe it will
+reach over \$300 billion by 2025. With billions of dollars in profit and
+over 2.5 billion gamers around the world, we can expect video game
+platforms to continue developing in 2020. Besides the consistent and
+impressive growth of the industry, it is interesting to note that there
+has been a shift in revenue sources in the gaming space lately. The
+gaming industry used to make most of its money by selling games but
+today its revenue is coming from a different perspective.
+
+source: Forbes
+\url{https://www.forbes.com/sites/ilkerkoksal/2019/11/08/video-gaming-industry--its-revenue-shift/\#8569649663e5}
+
+a- data set
+
+I get data from kaggle
+\url{https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings} We
+have more than 16000 row data about video game industry that contain can
+give us an idea about sales such as -\textgreater{} platform,genre,
+publisher, rating, Name, sales by region ( NA\_sale, EU\_Sales\ldots{} )
+etc.. names -\textgreater{}``Name'' ``Platform'' ``Year\_of\_Release''
+``Genre'' ``Publisher'' ``NA\_Sales''``EU\_Sales'' ``JP\_Sales''
+``Other\_Sales'' ``Global\_Sales'' "Rating but there are many missing
+data in the dataset we have to deal with this missing data every columns
+, even ve can drop some columns if thre are a lot of gaps wee'll
+visualie this data for get some idea about this industry. wee'ww try
+estimate sale performance
+
+load libraryes Loading packages for data exploration, visualization,
+preprocessing,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(tidyverse)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(caret)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(data.table)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"data.table"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(knitr)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(plotly)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"plotly"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(randomForest)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"randomForest"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(kernlab)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"kernlab"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#ml}
+\KeywordTok{library}\NormalTok{(randomForest)}
+\KeywordTok{library}\NormalTok{(kernlab)}
+\KeywordTok{library}\NormalTok{(caret)}
+\CommentTok{#data exploration}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(tidyverse) }
+\CommentTok{#plot}
+\KeywordTok{library}\NormalTok{(data.table)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}
+  \DataTypeTok{echo =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{message =} \OtherTok{FALSE}\NormalTok{,}
+  \DataTypeTok{warning =} \OtherTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-data-overview}{%
+\subsection{1- a Data overview}\label{a-data-overview}}
+
+data from kaggle
+\url{https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings}
+Context Motivated by Gregory Smith's web scrape of VGChartz Video Games
+Sales, this data set simply extends the number of variables with another
+web scrape from Metacritic. Unfortunately, there are missing
+observations as Metacritic only covers a subset of the platforms. Also,
+a game may not have all the observations of the additional variables
+discussed below. Complete cases are \textasciitilde{} 6,900
+
+Load data from external source
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url<-}\StringTok{ 'https://likyapix.com/game-data.csv'}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(url)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{take-a-look-data}{%
+\subsubsection{take a look data}\label{take-a-look-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                       Name Platform Year_of_Release        Genre Publisher
+## 1               Wii Sports      Wii            2006       Sports  Nintendo
+## 2        Super Mario Bros.      NES            1985     Platform  Nintendo
+## 3           Mario Kart Wii      Wii            2008       Racing  Nintendo
+## 4        Wii Sports Resort      Wii            2009       Sports  Nintendo
+## 5 Pokemon Red/Pokemon Blue       GB            1996 Role-Playing  Nintendo
+## 6                   Tetris       GB            1989       Puzzle  Nintendo
+##   NA_Sales EU_Sales JP_Sales Other_Sales Global_Sales Critic_Score Critic_Count
+## 1    41.36    28.96     3.77        8.45        82.53           76           51
+## 2    29.08     3.58     6.81        0.77        40.24           NA           NA
+## 3    15.68    12.76     3.79        3.29        35.52           82           73
+## 4    15.61    10.93     3.28        2.95        32.77           80           73
+## 5    11.27     8.89    10.22        1.00        31.37           NA           NA
+## 6    23.20     2.26     4.22        0.58        30.26           NA           NA
+##   User_Score User_Count Developer Rating
+## 1          8        322  Nintendo      E
+## 2                    NA                 
+## 3        8.3        709  Nintendo      E
+## 4          8        192  Nintendo      E
+## 5                    NA                 
+## 6                    NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#names}
+\KeywordTok{names}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Name"            "Platform"        "Year_of_Release" "Genre"          
+##  [5] "Publisher"       "NA_Sales"        "EU_Sales"        "JP_Sales"       
+##  [9] "Other_Sales"     "Global_Sales"    "Critic_Score"    "Critic_Count"   
+## [13] "User_Score"      "User_Count"      "Developer"       "Rating"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#summary}
+ \KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           Name          Platform    Year_of_Release
+##  Need for Speed: Most Wanted:   12   PS2    :2161   2008   :1427   
+##  FIFA 14                    :    9   DS     :2152   2009   :1426   
+##  LEGO Marvel Super Heroes   :    9   PS3    :1331   2010   :1255   
+##  Madden NFL 07              :    9   Wii    :1320   2007   :1197   
+##  Ratatouille                :    9   X360   :1262   2011   :1136   
+##  Angry Birds Star Wars      :    8   PSP    :1209   2006   :1006   
+##  (Other)                    :16663   (Other):7284   (Other):9272   
+##           Genre                             Publisher        NA_Sales      
+##  Action      :3370   Electronic Arts             : 1356   Min.   : 0.0000  
+##  Sports      :2348   Activision                  :  985   1st Qu.: 0.0000  
+##  Misc        :1750   Namco Bandai Games          :  939   Median : 0.0800  
+##  Role-Playing:1500   Ubisoft                     :  933   Mean   : 0.2633  
+##  Shooter     :1323   Konami Digital Entertainment:  834   3rd Qu.: 0.2400  
+##  Adventure   :1303   THQ                         :  715   Max.   :41.3600  
+##  (Other)     :5125   (Other)                     :10957                    
+##     EU_Sales         JP_Sales        Other_Sales        Global_Sales    
+##  Min.   : 0.000   Min.   : 0.0000   Min.   : 0.00000   Min.   : 0.0100  
+##  1st Qu.: 0.000   1st Qu.: 0.0000   1st Qu.: 0.00000   1st Qu.: 0.0600  
+##  Median : 0.020   Median : 0.0000   Median : 0.01000   Median : 0.1700  
+##  Mean   : 0.145   Mean   : 0.0776   Mean   : 0.04733   Mean   : 0.5335  
+##  3rd Qu.: 0.110   3rd Qu.: 0.0400   3rd Qu.: 0.03000   3rd Qu.: 0.4700  
+##  Max.   :28.960   Max.   :10.2200   Max.   :10.57000   Max.   :82.5300  
+##                                                                         
+##   Critic_Score    Critic_Count      User_Score     User_Count     
+##  Min.   :13.00   Min.   :  3.00          :6704   Min.   :    4.0  
+##  1st Qu.:60.00   1st Qu.: 12.00   tbd    :2425   1st Qu.:   10.0  
+##  Median :71.00   Median : 21.00   7.8    : 324   Median :   24.0  
+##  Mean   :68.97   Mean   : 26.36   8      : 290   Mean   :  162.2  
+##  3rd Qu.:79.00   3rd Qu.: 36.00   8.2    : 282   3rd Qu.:   81.0  
+##  Max.   :98.00   Max.   :113.00   8.3    : 254   Max.   :10665.0  
+##  NA's   :8582    NA's   :8582     (Other):6440   NA's   :9129     
+##      Developer        Rating    
+##           :6623          :6769  
+##  Ubisoft  : 204   E      :3991  
+##  EA Sports: 172   T      :2961  
+##  EA Canada: 167   M      :1563  
+##  Konami   : 162   E10+   :1420  
+##  Capcom   : 139   EC     :   8  
+##  (Other)  :9252   (Other):   7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# chack duplicarion}
+ \KeywordTok{duplicated}\NormalTok{(data) }\OperatorTok{%>%}\KeywordTok{sum}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{#dimensions}
+ \KeywordTok{dim}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16719    16
+\end{verbatim}
+
+\hypertarget{data-content}{%
+\subsubsection{Data content}\label{data-content}}
+
+Alongside the fields: Name, Platform, YearofRelease, Genre, Publisher,
+NASales, EUSales, JPSales, OtherSales, Global\_Sales, Rating - The ESRB
+ratings Acknowledgements
+
+\hypertarget{check-missing-mavlue}{%
+\subsubsection{check missing mavlue}\label{check-missing-mavlue}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sapply}\NormalTok{(data, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(x)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Name        Platform Year_of_Release           Genre       Publisher 
+##               0               0               0               0               0 
+##        NA_Sales        EU_Sales        JP_Sales     Other_Sales    Global_Sales 
+##               0               0               0               0               0 
+##    Critic_Score    Critic_Count      User_Score      User_Count       Developer 
+##            8582            8582               0            9129               0 
+##          Rating 
+##               0
+\end{verbatim}
+
+\hypertarget{check-empty-values}{%
+\subsubsection{check empty values}\label{check-empty-values}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sapply}\NormalTok{(data, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sum}\NormalTok{(x}\OperatorTok{==}\StringTok{''}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Name        Platform Year_of_Release           Genre       Publisher 
+##               2               0               0               2               0 
+##        NA_Sales        EU_Sales        JP_Sales     Other_Sales    Global_Sales 
+##               0               0               0               0               0 
+##    Critic_Score    Critic_Count      User_Score      User_Count       Developer 
+##              NA              NA            6704              NA            6623 
+##          Rating 
+##            6769
+\end{verbatim}
+
+As we can see there are many missing data in columns such as
+Critical\_count, Critical\_Score, User\_Score, User\_Count ,Developer
+columns and this missing datas more than half of dataset and will not
+give us an idea about dataset. Therefore we will ignore tihs columns
+during analysis an visualization bu we handle this columns on
+prediction.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{( }\KeywordTok{as.numeric}\NormalTok{(Year_of_Release) }\OperatorTok{<}\StringTok{ }\DecValTok{2019}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analysis-and-predictin}{%
+\section{2 Analysis and predictin}\label{analysis-and-predictin}}
+
+\hypertarget{a-analysis-and-visualize-data}{%
+\subsection{2-a Analysis and visualize
+data}\label{a-analysis-and-visualize-data}}
+
+\hypertarget{platform}{%
+\subsubsection{Platform}\label{platform}}
+
+first we'll look at platform column There are several popular video game
+plarform such as Nintendo, PS, XOne Among video game lovers and there is
+hard competiton between these companies let's look up
+
+unique(data\$Platform) there are more than 20 differen game platform in
+the dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{platform_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Platform) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+            \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+            \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+            \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{            )}
+\NormalTok{platform_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Global_sales))}\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Platform & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+PS2 & 2161 & 1255.64 & 583.84 & 339.29 & 139.20\tabularnewline
+X360 & 1262 & 971.63 & 602.47 & 270.76 & 12.43\tabularnewline
+PS3 & 1331 & 939.43 & 393.49 & 330.29 & 80.19\tabularnewline
+Wii & 1320 & 908.13 & 496.90 & 262.21 & 69.33\tabularnewline
+DS & 2152 & 807.10 & 382.67 & 188.89 & 175.57\tabularnewline
+PS & 1197 & 730.68 & 336.52 & 213.61 & 139.82\tabularnewline
+GBA & 822 & 318.50 & 187.54 & 75.25 & 47.33\tabularnewline
+PS4 & 393 & 314.23 & 108.74 & 141.09 & 16.00\tabularnewline
+PSP & 1209 & 294.30 & 109.17 & 66.68 & 76.78\tabularnewline
+PC & 974 & 260.30 & 94.53 & 142.44 & 0.17\tabularnewline
+3DS & 520 & 259.09 & 83.49 & 61.48 & 100.67\tabularnewline
+XB & 824 & 258.26 & 186.69 & 60.95 & 1.38\tabularnewline
+GB & 98 & 255.45 & 114.32 & 47.82 & 85.12\tabularnewline
+NES & 98 & 251.07 & 125.94 & 21.15 & 98.65\tabularnewline
+N64 & 319 & 218.88 & 139.02 & 41.06 & 34.22\tabularnewline
+SNES & 239 & 200.05 & 61.23 & 19.04 & 116.55\tabularnewline
+GC & 556 & 199.36 & 133.46 & 38.71 & 21.58\tabularnewline
+XOne & 247 & 159.44 & 93.12 & 51.59 & 0.34\tabularnewline
+2600 & 133 & 97.08 & 90.60 & 5.47 & 0.00\tabularnewline
+WiiU & 147 & 82.16 & 38.10 & 25.13 & 13.01\tabularnewline
+PSV & 432 & 54.12 & 12.58 & 13.12 & 21.93\tabularnewline
+SAT & 173 & 33.59 & 0.72 & 0.54 & 32.26\tabularnewline
+GEN & 29 & 30.78 & 21.05 & 6.05 & 2.70\tabularnewline
+DC & 52 & 15.97 & 5.43 & 1.69 & 8.56\tabularnewline
+SCD & 6 & 1.87 & 1.00 & 0.36 & 0.45\tabularnewline
+NG & 12 & 1.44 & 0.00 & 0.00 & 1.44\tabularnewline
+WS & 6 & 1.42 & 0.00 & 0.00 & 1.42\tabularnewline
+TG16 & 2 & 0.16 & 0.00 & 0.00 & 0.16\tabularnewline
+3DO & 3 & 0.10 & 0.00 & 0.00 & 0.10\tabularnewline
+GG & 1 & 0.04 & 0.00 & 0.00 & 0.04\tabularnewline
+PCFX & 1 & 0.03 & 0.00 & 0.00 & 0.03\tabularnewline
+\bottomrule
+\end{longtable}
+
+as expected PlayStation Series at the top, X360 and Nintendo following
+
+top 10 platform
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{platform_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Global_sales)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Platform, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+look up all platform at table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{platform_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Global_sales))}\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Platform & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+PS2 & 2161 & 1255.64 & 583.84 & 339.29 & 139.20\tabularnewline
+X360 & 1262 & 971.63 & 602.47 & 270.76 & 12.43\tabularnewline
+PS3 & 1331 & 939.43 & 393.49 & 330.29 & 80.19\tabularnewline
+Wii & 1320 & 908.13 & 496.90 & 262.21 & 69.33\tabularnewline
+DS & 2152 & 807.10 & 382.67 & 188.89 & 175.57\tabularnewline
+PS & 1197 & 730.68 & 336.52 & 213.61 & 139.82\tabularnewline
+GBA & 822 & 318.50 & 187.54 & 75.25 & 47.33\tabularnewline
+PS4 & 393 & 314.23 & 108.74 & 141.09 & 16.00\tabularnewline
+PSP & 1209 & 294.30 & 109.17 & 66.68 & 76.78\tabularnewline
+PC & 974 & 260.30 & 94.53 & 142.44 & 0.17\tabularnewline
+3DS & 520 & 259.09 & 83.49 & 61.48 & 100.67\tabularnewline
+XB & 824 & 258.26 & 186.69 & 60.95 & 1.38\tabularnewline
+GB & 98 & 255.45 & 114.32 & 47.82 & 85.12\tabularnewline
+NES & 98 & 251.07 & 125.94 & 21.15 & 98.65\tabularnewline
+N64 & 319 & 218.88 & 139.02 & 41.06 & 34.22\tabularnewline
+SNES & 239 & 200.05 & 61.23 & 19.04 & 116.55\tabularnewline
+GC & 556 & 199.36 & 133.46 & 38.71 & 21.58\tabularnewline
+XOne & 247 & 159.44 & 93.12 & 51.59 & 0.34\tabularnewline
+2600 & 133 & 97.08 & 90.60 & 5.47 & 0.00\tabularnewline
+WiiU & 147 & 82.16 & 38.10 & 25.13 & 13.01\tabularnewline
+PSV & 432 & 54.12 & 12.58 & 13.12 & 21.93\tabularnewline
+SAT & 173 & 33.59 & 0.72 & 0.54 & 32.26\tabularnewline
+GEN & 29 & 30.78 & 21.05 & 6.05 & 2.70\tabularnewline
+DC & 52 & 15.97 & 5.43 & 1.69 & 8.56\tabularnewline
+SCD & 6 & 1.87 & 1.00 & 0.36 & 0.45\tabularnewline
+NG & 12 & 1.44 & 0.00 & 0.00 & 1.44\tabularnewline
+WS & 6 & 1.42 & 0.00 & 0.00 & 1.42\tabularnewline
+TG16 & 2 & 0.16 & 0.00 & 0.00 & 0.16\tabularnewline
+3DO & 3 & 0.10 & 0.00 & 0.00 & 0.10\tabularnewline
+GG & 1 & 0.04 & 0.00 & 0.00 & 0.04\tabularnewline
+PCFX & 1 & 0.03 & 0.00 & 0.00 & 0.03\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{sales}{%
+\subsubsection{Sales}\label{sales}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{game_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Name) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{             }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+            \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+            \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+            \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{### ------  global sale by game}
+\NormalTok{ game_global_ <-}\StringTok{ }\NormalTok{game_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Global_sales)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }
+ 
+ \CommentTok{# over view global sales}
+\NormalTok{ game_global_ }\OperatorTok{%>%}\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Name & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+Wii Sports & 1 & 82.53 & 41.36 & 28.96 & 3.77\tabularnewline
+Grand Theft Auto V & 5 & 56.57 & 23.84 & 23.42 & 1.42\tabularnewline
+Super Mario Bros. & 2 & 45.31 & 32.48 & 4.88 & 6.96\tabularnewline
+Tetris & 2 & 35.84 & 26.17 & 2.95 & 6.03\tabularnewline
+Mario Kart Wii & 1 & 35.52 & 15.68 & 12.76 & 3.79\tabularnewline
+Wii Sports Resort & 1 & 32.77 & 15.61 & 10.93 & 3.28\tabularnewline
+Pokemon Red/Pokemon Blue & 1 & 31.37 & 11.27 & 8.89 &
+10.22\tabularnewline
+Call of Duty: Black Ops & 5 & 30.82 & 17.57 & 9.35 & 0.59\tabularnewline
+Call of Duty: Modern Warfare 3 & 4 & 30.59 & 15.54 & 11.15 &
+0.62\tabularnewline
+New Super Mario Bros. & 1 & 29.80 & 11.28 & 9.14 & 6.50\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# top 10 global sale}
+\NormalTok{ game_global_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Name, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{### ------  EU sale by game}
+\NormalTok{ game_eu_ <-}\StringTok{ }\NormalTok{game_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(EU_Sales)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }
+ 
+ \CommentTok{# over view global sales}
+\NormalTok{ game_eu_ }\OperatorTok{%>%}\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Name & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+Wii Sports & 1 & 82.53 & 41.36 & 28.96 & 3.77\tabularnewline
+Grand Theft Auto V & 5 & 56.57 & 23.84 & 23.42 & 1.42\tabularnewline
+Mario Kart Wii & 1 & 35.52 & 15.68 & 12.76 & 3.79\tabularnewline
+FIFA 15 & 8 & 17.34 & 3.09 & 12.02 & 0.14\tabularnewline
+Call of Duty: Modern Warfare 3 & 4 & 30.59 & 15.54 & 11.15 &
+0.62\tabularnewline
+FIFA 16 & 5 & 16.30 & 3.05 & 11.09 & 0.11\tabularnewline
+FIFA 14 & 9 & 16.48 & 2.81 & 10.96 & 0.20\tabularnewline
+Nintendogs & 1 & 24.67 & 9.05 & 10.95 & 1.93\tabularnewline
+Wii Sports Resort & 1 & 32.77 & 15.61 & 10.93 & 3.28\tabularnewline
+Call of Duty: Black Ops II & 4 & 29.40 & 14.08 & 10.84 &
+0.72\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# top 10 global sale}
+\NormalTok{ game_eu_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Name, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{### ------  NA sale by game}
+\NormalTok{ game_na_ <-}\StringTok{ }\NormalTok{game_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(NA_Sales)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }
+ 
+ \CommentTok{# over view global sales}
+\NormalTok{ game_na_ }\OperatorTok{%>%}\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Name & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+Wii Sports & 1 & 82.53 & 41.36 & 28.96 & 3.77\tabularnewline
+Super Mario Bros. & 2 & 45.31 & 32.48 & 4.88 & 6.96\tabularnewline
+Duck Hunt & 1 & 28.31 & 26.93 & 0.63 & 0.28\tabularnewline
+Tetris & 2 & 35.84 & 26.17 & 2.95 & 6.03\tabularnewline
+Grand Theft Auto V & 5 & 56.57 & 23.84 & 23.42 & 1.42\tabularnewline
+Call of Duty: Black Ops & 5 & 30.82 & 17.57 & 9.35 & 0.59\tabularnewline
+Super Mario World & 2 & 26.07 & 15.99 & 4.86 & 4.49\tabularnewline
+Mario Kart Wii & 1 & 35.52 & 15.68 & 12.76 & 3.79\tabularnewline
+Wii Sports Resort & 1 & 32.77 & 15.61 & 10.93 & 3.28\tabularnewline
+Call of Duty: Modern Warfare 3 & 4 & 30.59 & 15.54 & 11.15 &
+0.62\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# top 10 global sale}
+\NormalTok{ game_na_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Name, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-13-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{### ------  JP sale by game}
+\NormalTok{ game_jp_ <-}\StringTok{ }\NormalTok{game_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(JP_Sales)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }
+ 
+ \CommentTok{# over view global sales}
+\NormalTok{ game_jp_ }\OperatorTok{%>%}\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Name & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+Pokemon Red/Pokemon Blue & 1 & 31.37 & 11.27 & 8.89 &
+10.22\tabularnewline
+Pokemon Gold/Pokemon Silver & 1 & 23.10 & 9.00 & 6.18 &
+7.20\tabularnewline
+Super Mario Bros. & 2 & 45.31 & 32.48 & 4.88 & 6.96\tabularnewline
+New Super Mario Bros. & 1 & 29.80 & 11.28 & 9.14 & 6.50\tabularnewline
+Pokemon Diamond/Pokemon Pearl & 1 & 18.25 & 6.38 & 4.46 &
+6.04\tabularnewline
+Tetris & 2 & 35.84 & 26.17 & 2.95 & 6.03\tabularnewline
+Pokemon Black/Pokemon White & 1 & 15.14 & 5.51 & 3.17 &
+5.65\tabularnewline
+Dragon Quest VII: Warriors of Eden & 2 & 5.93 & 0.26 & 0.23 &
+5.40\tabularnewline
+Pokemon Ruby/Pokemon Sapphire & 1 & 15.85 & 6.06 & 3.90 &
+5.38\tabularnewline
+Animal Crossing: Wild World & 1 & 12.13 & 2.50 & 3.45 &
+5.33\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# top 10 global sale}
+\NormalTok{ game_jp_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Name, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{   }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-13-4.pdf}
+
+\hypertarget{distribution-of-global-sales-across-genres-and-rating}{%
+\subsubsection{Distribution of Global Sales across Genres and
+Rating}\label{distribution-of-global-sales-across-genres-and-rating}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Genre,}\DataTypeTok{y=}\KeywordTok{log}\NormalTok{(Global_Sales),}\DataTypeTok{col=}\NormalTok{Rating))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{varwidth=}\OtherTok{TRUE}\NormalTok{)}\OperatorTok{+}\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Rating)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x=}\KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle=}\DecValTok{90}\NormalTok{),}\DataTypeTok{panel.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill=}\StringTok{"black"}\NormalTok{), }\DataTypeTok{panel.grid.major =} \KeywordTok{element_blank}\NormalTok{() , }
+  \DataTypeTok{panel.grid.minor=}\KeywordTok{element_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\hypertarget{genres}{%
+\subsubsection{Genres}\label{genres}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{genre_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Genre) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+            \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+            \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+            \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{  )}
+
+\NormalTok{genre_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+##   Genre       count Global_sales NA_Sales EU_Sales JP_Sales
+##   <fct>       <int>        <dbl>    <dbl>    <dbl>    <dbl>
+## 1 ""              2         2.42     1.78     0.53     0.03
+## 2 "Action"     3370      1745.     879.     519.     161.  
+## 3 "Adventure"  1303       238.     105.      63.5     52.3 
+## 4 "Fighting"    849       447.     223.     100.      87.5 
+## 5 "Misc"       1750       803.     407.     213.     108.  
+## 6 "Platform"    888       828.     446.     200.     131.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{genre_  }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Global_sales)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule
+Genre & count & Global\_sales & NA\_Sales & EU\_Sales &
+JP\_Sales\tabularnewline
+\midrule
+\endhead
+Action & 3370 & 1745.27 & 879.01 & 519.13 & 161.44\tabularnewline
+Sports & 2348 & 1332.00 & 684.43 & 376.79 & 135.54\tabularnewline
+Shooter & 1323 & 1052.94 & 592.24 & 317.34 & 38.76\tabularnewline
+Role-Playing & 1500 & 934.40 & 330.81 & 188.71 & 355.46\tabularnewline
+Platform & 888 & 828.08 & 445.50 & 200.35 & 130.83\tabularnewline
+Misc & 1750 & 803.18 & 407.27 & 212.74 & 108.11\tabularnewline
+Racing & 1249 & 728.90 & 359.35 & 236.51 & 56.71\tabularnewline
+Fighting & 849 & 447.48 & 223.36 & 100.33 & 87.48\tabularnewline
+Simulation & 874 & 390.42 & 182.19 & 113.52 & 63.80\tabularnewline
+Puzzle & 580 & 243.02 & 122.87 & 50.01 & 57.31\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{genre_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Genre, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{xlab}\NormalTok{(}\StringTok{"Genre)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Game Count"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{'Sales By Genre'}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\hypertarget{publisher}{%
+\subsubsection{Publisher}\label{publisher}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{publisher_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Publisher)}\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(Publisher)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+            \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+            \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+            \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+top 10 publisher globaly
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{publisher__ <-}\StringTok{ }\NormalTok{publisher_ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(Global_sales))  }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+
+\NormalTok{publisher__ }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+##   Publisher                   count Global_sales NA_Sales EU_Sales JP_Sales
+##   <fct>                       <int>        <dbl>    <dbl>    <dbl>    <dbl>
+## 1 Nintendo                      706        1789.     817.     419.   458.  
+## 2 Electronic Arts              1356        1117.     600.     374.    14.4 
+## 3 Activision                    985         731.     433.     216.     6.71
+## 4 Sony Computer Entertainment   687         606.     266.     187.    74.2 
+## 5 Ubisoft                       933         472.     253.     162.     7.52
+## 6 Take-Two Interactive          422         404.     223.     119.     5.93
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{publisher__  }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{as.character}\NormalTok{(Publisher), }\DataTypeTok{y=}\NormalTok{Global_sales)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Publisher)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Global SAle"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{'Top 10 publisher global sales'}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\hypertarget{release-year}{%
+\subsubsection{Release year}\label{release-year}}
+
+let'look at the change game industry over year
+
+\hypertarget{game-sale-over-year}{%
+\paragraph{game sale over year}\label{game-sale-over-year}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year_of_Release) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{( }\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+             \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+             \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+             \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+             \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{  )}
+
+\NormalTok{year_  }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(Year_of_Release)), }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_path}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Year)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Game Count"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{'Game Count per year'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\hypertarget{publisher-change-overyear}{%
+\subsubsection{publisher change
+overyear}\label{publisher-change-overyear}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year_publisher_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year_of_Release, Publisher) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year_of_Release) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{( }\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{() )}
+
+\NormalTok{year_publisher_  }\OperatorTok{%>%}\StringTok{ }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Year_of_Release count
+##   <fct>           <int>
+## 1 1980                9
+## 2 1981               46
+## 3 1982               36
+## 4 1983               17
+## 5 1984               14
+## 6 1985               14
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year_publisher_   }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Year_of_Release, }\DataTypeTok{y=}\NormalTok{count)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Year)"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Game Count"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{'Sales By Yaer'}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\hypertarget{sales-over-year}{%
+\subsubsection{sales over year}\label{sales-over-year}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year_sale_ <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year_of_Release) }\OperatorTok{%>%}
+
+\StringTok{  }\KeywordTok{summarize}\NormalTok{( }\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+             \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+             \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+             \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+             \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+what is the total number of games released every year?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(data[data}\OperatorTok{$}\NormalTok{Year_of_Release}\OperatorTok{!=}\StringTok{"N/A"}\NormalTok{,], }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Year_of_Release, }\DataTypeTok{fill=}\NormalTok{..count..)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_gradient}\NormalTok{(}\DataTypeTok{low=}\StringTok{"purple"}\NormalTok{, }\DataTypeTok{high=}\StringTok{"orange"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_gradient}\NormalTok{(}\DataTypeTok{low=}\StringTok{"purple"}\NormalTok{, }\DataTypeTok{high=}\StringTok{"orange"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Number of Games Released every Year"}\NormalTok{, }\DataTypeTok{x=} \StringTok{"Game"}\NormalTok{, }
+       \DataTypeTok{y=} \StringTok{"Total Number of Games"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\DataTypeTok{stat=}\StringTok{'count'}\NormalTok{,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label=}\NormalTok{..count..), }\DataTypeTok{hjust=}\OperatorTok{-}\FloatTok{0.1}\NormalTok{,}\DataTypeTok{color=}\StringTok{"darkblue"}\NormalTok{, }\DataTypeTok{size=}\FloatTok{2.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\hypertarget{sales-over-year-by-by-region}{%
+\subsubsection{Sales over year by By
+Region}\label{sales-over-year-by-by-region}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year_sale_ <-}\StringTok{ }\NormalTok{data  }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year_of_Release) }\OperatorTok{%>%}
+\StringTok{  }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{( }\DataTypeTok{count       =} \KeywordTok{n}\NormalTok{(),}
+             \DataTypeTok{Global_sales =} \KeywordTok{sum}\NormalTok{(Global_Sales),}
+             \DataTypeTok{NA_Sales     =} \KeywordTok{sum}\NormalTok{(NA_Sales),}
+             \DataTypeTok{EU_Sales    =} \KeywordTok{sum}\NormalTok{(EU_Sales),}
+             \DataTypeTok{JP_Sales    =} \KeywordTok{sum}\NormalTok{(JP_Sales),}
+\NormalTok{  )}
+
+\NormalTok{year_sale_}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 40 x 6
+##    Year_of_Release count Global_sales NA_Sales EU_Sales JP_Sales
+##    <fct>           <int>        <dbl>    <dbl>    <dbl>    <dbl>
+##  1 1980                9         11.4    10.6      0.67      0  
+##  2 1981               46         35.8    33.4      1.96      0  
+##  3 1982               36         28.9    26.9      1.65      0  
+##  4 1983               17         16.8     7.76     0.8       8.1
+##  5 1984               14         50.4    33.3      2.1      14.3
+##  6 1985               14         53.9    33.7      4.74     14.6
+##  7 1986               21         37.1    12.5      2.84     19.8
+##  8 1987               16         21.7     8.46     1.41     11.6
+##  9 1988               15         47.2    23.9      6.59     15.8
+## 10 1989               17         73.4    45.2      8.44     18.4
+## # ... with 30 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(year_sale_, }\KeywordTok{aes}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(Year_of_Release)))) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ Global_sales, }\DataTypeTok{colour =} \StringTok{"Global"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ NA_Sales, }\DataTypeTok{colour =} \StringTok{"North America"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ EU_Sales, }\DataTypeTok{colour =} \StringTok{"Euro"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ JP_Sales, }\DataTypeTok{colour =} \StringTok{"Japan"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{video-game-sales-analysis_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\hypertarget{b-modelling-and-prediction}{%
+\subsection{2- b Modelling and
+prediction}\label{b-modelling-and-prediction}}
+
+wee will try predict the sales of future games based on the pattern that
+can be learned from this data set. At the moment, the analysis focuses
+only on the sales in EURO Sales.
+
+\hypertarget{prepare-data-afor-modellig}{%
+\subsubsection{prepare data afor
+modellig}\label{prepare-data-afor-modellig}}
+
+remove missing val in Genre \& Name
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(Genre)}\OperatorTok{&!}\KeywordTok{is.na}\NormalTok{(Name))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{train-test-spilit}{%
+\subsubsection{Train-test spilit}\label{train-test-spilit}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{indexes<-}\KeywordTok{createDataPartition}\NormalTok{(}\DataTypeTok{y=}\NormalTok{data}\OperatorTok{$}\NormalTok{Global_Sales,}\DataTypeTok{p=}\FloatTok{0.7}\NormalTok{,}\DataTypeTok{list=}\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{train_set<-data[indexes,]}
+\NormalTok{test_set<-data[}\OperatorTok{-}\NormalTok{indexes,]}
+
+\KeywordTok{nrow}\NormalTok{(train_set)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11705
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(test_set)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5014
+\end{verbatim}
+
+\hypertarget{lineer-regression}{%
+\subsubsection{lineer regression}\label{lineer-regression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ln_fit <-}\StringTok{ }\KeywordTok{train}\NormalTok{(EU_Sales}\OperatorTok{~}\NormalTok{Year_of_Release}\OperatorTok{+}\NormalTok{Genre}\OperatorTok{+}\NormalTok{Critic_Score}\OperatorTok{+}
+\StringTok{                  }\NormalTok{Critic_Count}\OperatorTok{+}\NormalTok{User_Score}\OperatorTok{+}\NormalTok{User_Count}\OperatorTok{+}\NormalTok{Platform,}
+                \DataTypeTok{data=}\NormalTok{train_set,}
+                 \DataTypeTok{na.action =}\NormalTok{ na.omit,}
+                \DataTypeTok{method=}\StringTok{"lm"}\NormalTok{)}
+
+\NormalTok{test_p_b <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(ln_fit,test_set)}
+\NormalTok{ln_rmse<-}\StringTok{ }\KeywordTok{RMSE}\NormalTok{(test_p_b, test_set}\OperatorTok{$}\NormalTok{EU_Sales) }\CommentTok{# }
+
+\NormalTok{ln_rmse}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6090377
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rmse_results <-}\StringTok{ }\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{method =} \StringTok{"Lineer regression"}\NormalTok{, }\DataTypeTok{RMSE =}\NormalTok{  ln_rmse)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sport-vector-machine}{%
+\subsubsection{Sport vector machine}\label{sport-vector-machine}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method=}\StringTok{'none'}\NormalTok{, )}
+
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{666}\NormalTok{)}
+\NormalTok{sv_fit <-}\StringTok{ }\KeywordTok{train}\NormalTok{(EU_Sales}\OperatorTok{~}\NormalTok{Year_of_Release}\OperatorTok{+}\NormalTok{Genre}\OperatorTok{+}\NormalTok{Critic_Score}\OperatorTok{+}
+\StringTok{                 }\NormalTok{Critic_Count}\OperatorTok{+}\NormalTok{User_Score}\OperatorTok{+}\NormalTok{User_Count}\OperatorTok{+}\NormalTok{Platform,}
+               \DataTypeTok{data=}\NormalTok{train_set,}
+               \DataTypeTok{na.action =}\NormalTok{ na.omit,}
+               \DataTypeTok{trControl=}\NormalTok{control,}
+               \DataTypeTok{method=}\StringTok{"svmLinear"}\NormalTok{ )}
+
+
+\NormalTok{test_p_svm<-}\StringTok{ }\KeywordTok{predict}\NormalTok{(sv_fit,test_set)}
+
+\NormalTok{sv_rmse<-}\StringTok{ }\KeywordTok{RMSE}\NormalTok{(test_p_svm, test_set}\OperatorTok{$}\NormalTok{EU_Sales) }\CommentTok{# }
+
+\NormalTok{sv_rmse}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5697345
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rmse_results <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(rmse_results, }\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{method =} \StringTok{"Support vectore meachine"}\NormalTok{, }\DataTypeTok{RMSE =}\NormalTok{  sv_rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{random-forest}{%
+\subsubsection{random forest}\label{random-forest}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#10 folds repeat 3 times}
+\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method=}\StringTok{'none'}\NormalTok{)}
+ 
+
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{666}\NormalTok{)}
+\CommentTok{#Number randomely variable selected is mtry}
+\NormalTok{mtry <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{ncol}\NormalTok{(train_set))}
+\NormalTok{tunegrid <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{.mtry=}\NormalTok{mtry)}
+\NormalTok{rf_fit <-}\StringTok{ }\KeywordTok{train}\NormalTok{(EU_Sales}\OperatorTok{~}\NormalTok{Year_of_Release}\OperatorTok{+}\NormalTok{Genre}\OperatorTok{+}\NormalTok{Critic_Score}\OperatorTok{+}
+\StringTok{                      }\NormalTok{Critic_Count}\OperatorTok{+}\NormalTok{User_Score}\OperatorTok{+}\NormalTok{User_Count}\OperatorTok{+}\NormalTok{Platform,}
+                    \DataTypeTok{data=}\NormalTok{train_set, }
+                    \DataTypeTok{method=}\StringTok{'rf'}\NormalTok{, }
+                    \DataTypeTok{na.action =}\NormalTok{ na.omit,}
+                   
+                    \DataTypeTok{tuneGrid=}\NormalTok{tunegrid, }
+                    \DataTypeTok{trControl=}\NormalTok{control)}
+
+\NormalTok{rf_prd<-}\StringTok{ }\KeywordTok{predict}\NormalTok{(rf_fit,test_set)}
+
+\NormalTok{rf_rmse<-}\StringTok{ }\KeywordTok{RMSE}\NormalTok{(rf_prd, test_set}\OperatorTok{$}\NormalTok{EU_Sales) }
+
+
+\NormalTok{rf_rmse}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5633096
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rmse_results <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(rmse_results, }\KeywordTok{data_frame}\NormalTok{(}\DataTypeTok{method =} \StringTok{"Random  forest"}\NormalTok{, }\DataTypeTok{RMSE =}\NormalTok{  rf_rmse))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{check-results}{%
+\subsubsection{check results}\label{check-results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rmse_results }\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\toprule
+method & RMSE\tabularnewline
+\midrule
+\endhead
+Lineer regression & 0.6090377\tabularnewline
+Support vectore meachine & 0.5697345\tabularnewline
+Random forest & 0.5633096\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{results}{%
+\section{3 Results}\label{results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rmse_results }\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\toprule
+method & RMSE\tabularnewline
+\midrule
+\endhead
+Lineer regression & 0.6090377\tabularnewline
+Support vectore meachine & 0.5697345\tabularnewline
+Random forest & 0.5633096\tabularnewline
+\bottomrule
+\end{longtable}
+
+Random forest models with the best performance. performance are actually
+very close to each other. lineer regression has a slightly worse
+performance compared to the two models. support vector machne (linear)
+has the worst performance.
+
+\hypertarget{conclusion}{%
+\section{4 Conclusion}\label{conclusion}}
+
+Data Science and machine learning methods can help to industy that
+improving fast with many publisher even though most people spend their
+most time on mobile phone, social meida and other modern thinks. We can
+see how improving over years in this simple work. in this work we tried
+analysis and visualization this sample data and create machine learning
+models that predict game sales in Euro we can see random forest model
+work fine in this data set, but we can get different result if we work
+larger dataset that has less missing data
+
+My project Github repository is
+\textbf{\href{https://github.com/savasturkoglu1/edx-project}{in this
+link}}
+
+\end{document}
